@@ -15,6 +15,7 @@ import { Magnetic } from "@/components/reactbits/Magnetic";
 import { Reveal, RevealText } from "@/components/reactbits/Reveal";
 import { CountUp } from "@/components/reactbits/CountUp";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { heroSlides, homeGallery, homeServices, homeStats } from "@/lib/homedata";
 
 const MTCard = Card as unknown as React.ComponentType<Record<string, unknown>>;
 const MTCardHeader = CardHeader as unknown as React.ComponentType<Record<string, unknown>>;
@@ -23,38 +24,7 @@ const MTCardFooter = CardFooter as unknown as React.ComponentType<Record<string,
 const MTTypography = Typography as unknown as React.ComponentType<Record<string, unknown>>;
 const MTButton = Button as unknown as React.ComponentType<Record<string, unknown>>;
 
-const HERO_SLIDES = [
-  {
-    id: "wedding",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    badge: "Wedding Stories",
-    titleLine1: "Timeless Wedding Moments,",
-    titleLine2: "Captured Forever.",
-    subtitle:
-      "Cinematic photography and films that preserve emotions, rituals, and the magic in between.",
-  },
-  {
-    id: "prewedding",
-    image:
-      "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    badge: "Pre-Wedding",
-    titleLine1: "Your Love, Your Vibe,",
-    titleLine2: "A Story in Frames.",
-    subtitle:
-      "Destination-ready concepts, effortless posing direction, and edits that feel premium and natural.",
-  },
-  {
-    id: "events",
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    badge: "Events & Celebrations",
-    titleLine1: "Every Celebration,",
-    titleLine2: "Shot Like Cinema.",
-    subtitle:
-      "From intimate ceremonies to grand receptions—clean coverage, candid moments, and fast delivery.",
-  },
-];
+
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
@@ -65,12 +35,12 @@ export default function Home() {
     if (reduceMotion) return;
     if (paused) return;
     const intervalId = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 7000);
     return () => window.clearInterval(intervalId);
   }, [paused, reduceMotion]);
 
-  const slide = HERO_SLIDES[activeSlide];
+  const slide = heroSlides[activeSlide];
 
   return (
     <div className="flex flex-col items-center justify-center overflow-x-hidden">
@@ -220,7 +190,7 @@ export default function Home() {
               type="button"
               aria-label="Previous slide"
               onClick={() =>
-                setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
+                setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
               }
               className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition hover:bg-white/15"
             >
@@ -230,7 +200,7 @@ export default function Home() {
             </button>
 
             <div className="flex items-center gap-2">
-              {HERO_SLIDES.map((s, idx) => (
+              {heroSlides.map((s, idx) => (
                 <button
                   key={s.id}
                   type="button"
@@ -246,7 +216,7 @@ export default function Home() {
             <button
               type="button"
               aria-label="Next slide"
-              onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
+              onClick={() => setActiveSlide((prev) => (prev + 1) % heroSlides.length)}
               className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition hover:bg-white/15"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -271,12 +241,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-12 bg-white w-full border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { label: "Weddings Covered", value: 500, suffix: "+" },
-            { label: "Happy Couples", value: 1200, suffix: "+" },
-            { label: "Cities Covered", value: 25, suffix: "+" },
-            { label: "Years Experience", value: 10, suffix: "+" },
-          ].map((stat, idx) => (
+          {homeStats.map((stat, idx) => (
             <Reveal key={idx} delay={idx * 0.06} y={10}>
               <div>
                 <MTTypography variant="h2" color="blue" className="font-bold text-primary-600 flex justify-center items-center gap-1">
@@ -312,23 +277,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Wedding Photography",
-                desc: "Cinematic storytelling of your big day, capturing every emotion and ritual.",
-                img: "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-              },
-              {
-                title: "Pre-Wedding Shoots",
-                desc: "Romantic getaways and stylized shoots to celebrate your engagement.",
-                img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-              },
-              {
-                title: "Maternity & Kids",
-                desc: "Preserving the innocence and joy of new beginnings and growing families.",
-                img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-              },
-            ].map((service, index) => (
+            {homeServices.map((service, index) => (
               <Reveal key={index} delay={index * 0.08} y={16}>
                 <Magnetic className="h-full">
                   <MTCard className="h-full overflow-hidden hover:shadow-2xl transition-shadow duration-300">
@@ -415,13 +364,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
-            {[
-              { src: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", span: "md:col-span-2 md:row-span-2" },
-              { src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", span: "md:col-span-1 md:row-span-1" },
-              { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", span: "md:col-span-1 md:row-span-2" },
-              { src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", span: "md:col-span-1 md:row-span-1" },
-              { src: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", span: "md:col-span-2 md:row-span-1" },
-            ].map((item, idx) => (
+            {homeGallery.map((item, idx) => (
               <Reveal
                 key={idx}
                 delay={idx * 0.07}

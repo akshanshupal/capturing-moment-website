@@ -4,6 +4,7 @@ import React from "react";
 import { Typography, Input, Textarea, Button, Card, CardBody } from "@material-tailwind/react";
 import { Magnetic } from "@/components/reactbits/Magnetic";
 import { Reveal } from "@/components/reactbits/Reveal";
+import { contactInfo, serviceOptions } from "@/lib/contactdata";
 
 const MTTypography = Typography as unknown as React.ComponentType<Record<string, unknown>>;
 const MTInput = Input as unknown as React.ComponentType<Record<string, unknown>>;
@@ -46,7 +47,7 @@ export default function ContactPage() {
                 <div>
                   <MTTypography variant="h6" color="blue-gray" className="text-gray-900">Visit Us</MTTypography>
                   <MTTypography color="gray" className="font-normal text-gray-600">
-                    123 Photography Lane, Hauz Khas Village,<br />New Delhi, India 110016
+                    {contactInfo.address}
                   </MTTypography>
                 </div>
               </div>
@@ -62,7 +63,7 @@ export default function ContactPage() {
                 <div>
                   <MTTypography variant="h6" color="blue-gray" className="text-gray-900">Call Us</MTTypography>
                   <MTTypography color="gray" className="font-normal text-gray-600">
-                    +91 98765 43210
+                    {contactInfo.phone}
                   </MTTypography>
                 </div>
               </div>
@@ -78,7 +79,7 @@ export default function ContactPage() {
                 <div>
                   <MTTypography variant="h6" color="blue-gray" className="text-gray-900">Email Us</MTTypography>
                   <MTTypography color="gray" className="font-normal text-gray-600">
-                    info@capturingmoment.com
+                   {contactInfo.email}
                   </MTTypography>
                 </div>
               </div>
@@ -99,10 +100,11 @@ export default function ContactPage() {
                     <label className="mb-2 block text-sm font-medium text-gray-900">Service Type</label>
                     <select className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
                       <option value="">Select Service</option>
-                      <option value="wedding">Wedding Photography</option>
-                      <option value="pre-wedding">Pre-Wedding Shoot</option>
-                      <option value="maternity">Maternity/Baby</option>
-                      <option value="other">Other</option>
+                      {serviceOptions.map((option)=> (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                          </option>
+                      ))}
                     </select>
                   </div>
                   <MTTextarea label="Message" size="lg" rows={4} />

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Magnetic } from "@/components/reactbits/Magnetic";
 import { Reveal } from "@/components/reactbits/Reveal";
+import {cityservices} from "@/lib/cityservices";
 
 const MTTypography = Typography as unknown as React.ComponentType<Record<string, unknown>>;
 const MTButton = Button as unknown as React.ComponentType<Record<string, unknown>>;
@@ -61,42 +62,27 @@ export default function CityPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              title: `Wedding Photography in ${city}`,
-              desc: `From traditional ceremonies to modern receptions, we cover it all in ${city}.`,
-              img: "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            },
-            {
-              title: `Pre-Wedding Shoots in ${city}`,
-              desc: `Discover the most beautiful locations in ${city} for your romantic shoot.`,
-              img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            },
-            {
-              title: `Event Coverage in ${city}`,
-              desc: `Corporate events, birthdays, and anniversaries captured perfectly in ${city}.`,
-              img: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            },
-          ].map((service, idx) => (
-            <Reveal key={idx} delay={idx * 0.08} y={16}>
-              <Magnetic className="h-full">
-                <MTCard className="h-full hover:shadow-lg transition-shadow">
-                  <MTCardHeader floated={false} className="h-48 m-0 rounded-b-none relative">
-                    <Image
-                      src={service.img}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </MTCardHeader>
-                  <MTCardBody className="text-center p-6">
-                    <MTTypography variant="h5" color="blue-gray" className="mb-2 font-serif text-gray-900">
-                      {service.title}
-                    </MTTypography>
-                    <MTTypography className="font-normal text-gray-600 mb-4">
-                      {service.desc}
-                    </MTTypography>
-                    <Magnetic className="inline-block">
+      {cityservices.map((service, idx) => (
+  <Reveal key={idx} delay={idx * 0.08} y={16}>
+    <Magnetic className="h-full">
+      <MTCard className="h-full hover:shadow-lg">
+        <MTCardHeader floated={false} className="h-48 relative">
+          <Image
+            src={service.img}
+            alt={service.title}
+            fill
+            className="object-cover"
+          />
+        </MTCardHeader>
+
+        <MTCardBody className="text-center">
+          <MTTypography variant="h5">
+            {service.title.replace("{city}", city)}
+          </MTTypography>
+          <MTTypography className="text-gray-600">
+            {service.desc.replace("{city}",city)}
+          </MTTypography>
+          <Magnetic className="inline-block">
                       <Link href="/contact">
                         <MTButton
                           variant="outlined"
@@ -108,11 +94,13 @@ export default function CityPage() {
                         </MTButton>
                       </Link>
                     </Magnetic>
-                  </MTCardBody>
-                </MTCard>
-              </Magnetic>
-            </Reveal>
-          ))}
+        </MTCardBody>
+      </MTCard>
+    </Magnetic>
+  </Reveal>
+))}
+
+
         </div>
       </section>
 

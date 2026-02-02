@@ -6,6 +6,7 @@ import { Magnetic } from "@/components/reactbits/Magnetic";
 import { Reveal } from "@/components/reactbits/Reveal";
 
 import { CountUp } from "@/components/reactbits/CountUp";
+import { packages } from "@/lib/packagesdata";
 
 const MTTypography = Typography as unknown as React.ComponentType<Record<string, unknown>>;
 const MTCard = Card as unknown as React.ComponentType<Record<string, unknown>>;
@@ -13,48 +14,7 @@ const MTCardBody = CardBody as unknown as React.ComponentType<Record<string, unk
 const MTCardHeader = CardHeader as unknown as React.ComponentType<Record<string, unknown>>;
 const MTButton = Button as unknown as React.ComponentType<Record<string, unknown>>;
 
-const packages = [
-  {
-    title: "Essential",
-    price: 50000,
-    features: [
-      "1 Day Wedding Coverage",
-      "Traditional Photography",
-      "Traditional Videography",
-      "1 Album (30 Sheets)",
-      "Digital Soft Copies",
-    ],
-    recommended: false,
-  },
-  {
-    title: "Premium",
-    price: 125000,
-    features: [
-      "2 Days Wedding Coverage",
-      "Candid Photography",
-      "Cinematic Videography",
-      "Drone Coverage",
-      "Pre-Wedding Shoot",
-      "2 Premium Albums",
-      "Instagram Teaser",
-    ],
-    recommended: true,
-  },
-  {
-    title: "Luxury",
-    price: 250000,
-    features: [
-      "3 Days Complete Coverage",
-      "Senior Candid Team",
-      "Cinematic Film (20-25 mins)",
-      "Same Day Edit (Highlights)",
-      "Pre-Wedding (Destination)",
-      "3 Luxury Albums",
-      "Live Streaming",
-    ],
-    recommended: false,
-  },
-];
+
 
 export default function PackagesPage() {
   return (
